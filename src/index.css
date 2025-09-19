@@ -24,6 +24,16 @@
   align-items: center;
   gap: 4vw;
 }
+.bottom-bar{
+  width: 100vw;
+  height: 5vh;
+  background-color: #004C33;
+  color: beige;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 5vw;
+}
 
 a {
   font-weight: 500;

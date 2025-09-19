@@ -21,8 +21,6 @@ export default function Hand({ children }) {
         const newStyle = { '--i': i, '--tx': tx, '--ty': ty, '--r': r };
         return cloneElement(child, {
           style: {
-            // The issue is that cloneElement overwrites styles.
-            // We need to merge them instead.
             ...child.props.style,
             ...newStyle,
             opacity: isMounted ? 1 : 0,
