@@ -1,0 +1,160 @@
+@property --rx { syntax: '<angle>'; initial-value: 0deg; inherits: false; }
+@property --ry { syntax: '<angle>'; initial-value: 0deg; inherits: false; }
+@property --s  { syntax: '<number>'; initial-value: 1;    inherits: false; }
+@property --float { syntax: '<length>'; initial-value: 0px; inherits: false; }
+
+h1 {
+  font-size: 3.2em;
+  line-height: 1.1;
+  align-self: center;
+  text-align: center;
+}
+
+.center-components {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#root {
+  text-align: center;
+  overflow: hidden;
+}
+
+.card-table {
+  position: absolute;
+  background: #004C33;
+  width: 100vw;
+  height: 100vh;
+  justify-content: center;
+  display: flex;
+  align-items: center; 
+  gap: 2vh;
+  overflow: hidden;
+}
+
+.playing-card {
+  width: 24vh;
+  height: 36vh;
+  background-color: beige;
+  border-radius: 12px;
+  box-shadow: 0 6px 15px rgba(0,0,0,0.18);
+  position: relative; /* Needed for corner positioning */
+  font-size: 3vh;
+
+  /* state */
+  --t: 0deg;
+  --rx: 0deg;
+  --ry: 0deg;
+  --s: 1;
+
+  transform-style: preserve-3d;
+  /* Sine-driven vertical float: amplitude = 10px */
+  transform: translateY(calc(sin(var(--t)) * -10px))
+             rotateX(var(--rx)) rotateY(var(--ry)) scale(var(--s));
+  transition:
+    --rx 220ms cubic-bezier(0.2, 0.8, 0.2, 1),
+    --ry 220ms cubic-bezier(0.2, 0.8, 0.2, 1),
+    --s  220ms cubic-bezier(0.2, 0.8, 0.2, 1),
+    box-shadow 220ms ease-out;
+  will-change: transform;  
+  cursor: pointer;
+  padding: 2vh;
+  --suit-size: 4vh;
+  --pad: 8px;
+
+  justify-content: center;
+  display: flex;
+  align-items: center; 
+}
+
+.playing-card:hover {
+  --rx: 10deg;
+  --ry: 12deg;
+  --s: 1.08;
+  /* The float animation is now part of the .deal .playing-card rule */
+  animation: floatIdle 2.6s linear infinite;
+  box-shadow: 0 14px 28px rgba(0,0,0,0.5);
+}
+
+.deal .playing-card {
+  animation: deal 520ms cubic-bezier(.2,.7,.2,1) both, floatIdle 4s linear infinite;
+  animation-delay: calc(var(--i) * 120ms), calc(var(--i) * 120ms + 520ms);
+}
+
+.corner {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  --pad: 8px;
+  --suit-size: 2.5vh;
+  font-size: 3.5vh;
+  font-weight: bold;
+  line-height: 1;
+}
+
+.corner .suit {
+  width: var(--suit-size);
+  height: var(--suit-size);
+}
+
+.corner.top-left {
+  top: var(--pad);
+  left: var(--pad);
+}
+
+.corner.bottom-right {
+  bottom: var(--pad);
+  right: var(--pad);
+  transform: rotate(180deg);
+}
+
+@keyframes deal {
+  0%   { transform: translate(-50vw, 50vh) rotate(-45deg) rotateY(180deg); opacity: 0; }
+  10% {
+    transform: translate(var(--tx), var(--ty)) rotate(var(--r))
+               rotateX(var(--rx)) rotateY(180deg) scale(var(--s));
+    opacity: 1;
+  }
+  100% {
+    transform: translate(var(--tx), var(--ty)) rotate(var(--r))
+               /* We need to re-add the other transforms so hover works */
+               rotateX(var(--rx)) rotateY(var(--ry)) scale(var(--s));
+    opacity: 1; }
+}
+
+@keyframes floatIdle {
+  from { --t: 0deg; }
+  to   { --t: 360deg; }
+}
+
+
+@media (prefers-reduced-motion: reduce) {
+  .deal .card { animation: none; opacity: 1; transform: translate(var(--tx), var(--ty)) rotate(var(--r)); }
+}
+
+    @keyframes bounceFadeIn {
+      0%   { opacity: 0; transform: translateY(16px) scale(0.98); }
+      60%  { opacity: 1; transform: translateY(-8px) scale(1.02); }
+      80%  {           transform: translateY(4px)  scale(0.995); }
+      100% { opacity: 1; transform: translateY(0)  scale(1); }
+    }
+
+    .bounce-fade {
+      display: inline-block;
+      animation-name: bounceFadeIn;
+      animation-duration: var(--duration, 700ms);
+      animation-delay: var(--delay, 0ms);
+      animation-timing-function: ease-out;
+      animation-fill-mode: both;
+      will-change: opacity, transform;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .bounce-fade {
+        animation: none !important;
+        opacity: 1 !important;
+        transform: none !important;
+      }
+    }
