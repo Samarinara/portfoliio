@@ -105,6 +105,11 @@
   transform: rotate(180deg);
 }
 
+.card-text {
+  text-justify: newspaper;
+}
+
+
 @keyframes deal {
   0%   { transform: translate(-50vw, 50vh) rotate(-45deg) rotateY(180deg); opacity: 0; }
   10% {
