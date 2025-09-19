@@ -3,12 +3,7 @@
 @property --s  { syntax: '<number>'; initial-value: 1;    inherits: false; }
 @property --float { syntax: '<length>'; initial-value: 0px; inherits: false; }
 
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
-  align-self: center;
-  text-align: center;
-}
+
 
 .center-components {
   display: flex;
@@ -25,7 +20,7 @@ h1 {
   position: absolute;
   background: #004C33;
   width: 100vw;
-  height: 100vh;
+  height: 90vh;
   justify-content: center;
   display: flex;
   align-items: center; 

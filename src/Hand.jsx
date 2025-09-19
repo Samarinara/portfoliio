@@ -1,10 +1,10 @@
 import React, { Children, cloneElement, useEffect, useState } from 'react';
 
 export default function Hand({ children }) {
-  const [isDealt, setIsDealt] = useState(false);
+  const [isMounted, setIsMounted] = useState(false);
   useEffect(() => {
     // Trigger the animation shortly after mounting
-    const timer = setTimeout(() => setIsDealt(true), 100);
+    const timer = setTimeout(() => setIsMounted(true), 100);
     return () => clearTimeout(timer);
   }, []);
 
@@ -13,7 +13,7 @@ export default function Hand({ children }) {
   const middleIndex = Math.floor(numCards / 2);
 
   return (
-    <div className={`card-table ${isDealt ? 'deal' : ''}`}>
+    <div className={`card-table ${isMounted ? 'deal' : ''}`}>
       {Children.map(cards, (child, i) => {
         const tx = `${(i - middleIndex) * 20}%`;
         const ty = `${(Math.abs(i - middleIndex) * 10) - 5}%`;
@@ -25,6 +25,7 @@ export default function Hand({ children }) {
             // We need to merge them instead.
             ...child.props.style,
             ...newStyle,
+            opacity: isMounted ? 1 : 0,
           },
         });
       })}

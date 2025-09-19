@@ -5,12 +5,24 @@
 
   color-scheme: light dark;
   color: rgba(0, 0, 0, 0.87);
-  background-color: #242424;
+  background-color: #004C33;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  overflow: hidden;
+}
+
+.top-bar{
+  width: 100vw;
+  height: 10vh;
+  background-color: #004C33;
+  color: beige;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 4vw;
 }
 
 a {
