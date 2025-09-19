@@ -12,7 +12,7 @@ function UnderConstruction() {
   return (
     <div className='App'>
       <Hand>
-        <PlayingCard Suit={SpadeIcon} number={card1} onClick={() => navigate('/home')}>Still under construction <br /> Click here to go home</PlayingCard>
+        <PlayingCard Suit={SpadeIcon} number={card1} onClick={() => navigate('/home')}>Sorry :(<br />Still under construction <br /> Click here to go home</PlayingCard>
       </Hand>
     </div>
   );

@@ -41,7 +41,7 @@ export const ClubIcon = (props) => (
 );
 
 export const DiamondIcon = (props) => (
-    <svg viewBox="0 0 512 512" width="28" height="28" {...props}>
+    <svg viewBox="0 0 512 512" width="35" height="35" {...props}>
         <path
         fill="currentColor"
         d="M431.684,252.936c-40.578-32.779-150.62-185.32-171.561-247.398C258.899,1.913,257.845,0,255.988,0

@@ -18,8 +18,8 @@ function App() {
   return (
     <div className='App'>
       <Hand>
-        <PlayingCard Suit={SpadeIcon} number={card1} onClick={() => navigate('/under-construction')}>Click here for my Github</PlayingCard>
-        <PlayingCard Suit={HeartIcon} color="red" number={card2}>hello</PlayingCard>
+        <PlayingCard Suit={SpadeIcon} number={card1} onClick={() => window.open('https://github.com/samarinara')}>Click here for my Github</PlayingCard>
+        <PlayingCard Suit={HeartIcon} color="red" number={card2} onClick={() => navigate('/under-construction')}>Click here to see all of my experience</PlayingCard>
         <PlayingCard Suit={DiamondIcon} color="red" number={card3} onClick={() => navigate('/under-construction')}>
           <div className='card-text'>
             <p>Hi I'm Sam</p>
@@ -27,8 +27,8 @@ function App() {
             Click here to learn more about me
           </div>
         </PlayingCard>
-        <PlayingCard Suit={ClubIcon} color="black" number={card4}>hello</PlayingCard>
-        <PlayingCard Suit={HeartIcon}  color="red" number={card5}>hello</PlayingCard>
+        <PlayingCard Suit={ClubIcon} color="black" number={card4} onClick={() => navigate('/under-construction')}>Click here to read my blog</PlayingCard>
+        <PlayingCard Suit={HeartIcon}  color="red" number={card5} onClick={() => navigate('/under-construction')}>Click here to download my CV</PlayingCard>
 
       </Hand>
       <h2>hello</h2>
