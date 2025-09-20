@@ -6,6 +6,8 @@ import App from './App.jsx'
 import TopBar from './TopBar.jsx'
 import BottomBar from './bottom-bar.jsx'
 import UnderConstruction from './UnderConstruction.jsx'
+import Projects from './Projects.jsx'
+
 
 
 
@@ -16,10 +18,10 @@ createRoot(document.getElementById('root')).render(
         <Routes>
           <Route path='/home' element={<App />} />
           <Route path='/under-construction' element={<UnderConstruction />} />
+          <Route path='/projects' element={<Projects />} />
           <Route path='*' element={<Navigate to='/home' />} />
 
         </Routes>
-      <BottomBar></BottomBar>
     </BrowserRouter>
   </StrictMode>,
 )

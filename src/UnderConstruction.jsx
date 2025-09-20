@@ -10,7 +10,7 @@ function UnderConstruction() {
   const navigate = useNavigate()
 
   return (
-    <div className='App'>
+    <div>
       <Hand>
         <PlayingCard Suit={SpadeIcon} number={card1} onClick={() => navigate('/home')}>Sorry :(<br />Still under construction <br /> Click here to go home</PlayingCard>
       </Hand>
