@@ -97,6 +97,8 @@
 .corner.top-left {
   top: var(--pad);
   left: var(--pad);
+  align-items: left;
+
 }
 
 .corner.bottom-right {
