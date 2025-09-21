@@ -1,6 +1,6 @@
 import React, { Children, cloneElement, useEffect, useState } from 'react';
 
-export default function FoldedHand({ children }) {
+export default function CardHand({ children, className = '' }) {
   const [isMounted, setIsMounted] = useState(false);
   useEffect(() => {
     // Trigger the animation shortly after mounting
@@ -13,7 +13,7 @@ export default function FoldedHand({ children }) {
   const middleIndex = (numCards - 1) / 2;
 
   return (
-    <div className={`card-table align-top ${isMounted ? 'deal' : ''}`}>
+    <div className={`card-hand ${isMounted ? 'deal' : ''} ${className}`}>
       {Children.map(cards, (child, i) => {
         // Overlapping stack with rotation
         const offsetX = (i - middleIndex) * 40; // Center horizontally on the middle card

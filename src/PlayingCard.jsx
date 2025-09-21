@@ -5,10 +5,11 @@ export function PlayingCard({
   number = "10",
   Suit,
   children,
+  className,
   ...rest
 }) {
   return (
-    <div className="playing-card" {...rest} style={{ ...rest.style, color }}>
+    <div className={`playing-card ${className || ''}`.trim()} {...rest} style={{ ...rest.style, color }}>
       <div className="corner top-left">
         <div className="number">{number}</div>
         {Suit && <Suit className="suit" aria-hidden="true" />}
