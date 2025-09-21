@@ -13,11 +13,11 @@ export default function FoldedHand({ children }) {
   const middleIndex = (numCards - 1) / 2;
 
   return (
-    <div className={`card-table ${isMounted ? 'deal' : ''}`}>
+    <div className={`card-table allign-top ${isMounted ? 'deal' : ''}`}>
       {Children.map(cards, (child, i) => {
         // Overlapping stack with rotation
-        const offsetX = 40 * i; // No horizontal offset to stack them
-        const offsetY = i * 40; // No vertical offset to stack them
+        const offsetX = (i - middleIndex) * 40; // Center horizontally on the middle card
+        const offsetY = (i - middleIndex) * 40; // Center vertically on the middle card
         const angle = (i - middleIndex) * 4; // Apply a slight rotation to each card
         
         const tx = `${offsetX}px`;

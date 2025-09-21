@@ -19,13 +19,15 @@ function App() {
 
   return (
     <div className='App'>
-      <FoldedHand>
-        <PlayingCard Suit={RustIcon} color="red" number={"Pomme-Doro"}></PlayingCard>
-        <PlayingCard Suit={ReactIcon} color="#00a5c3ff" number={"MACRO blog"}></PlayingCard>
-        <PlayingCard Suit={TauriIcon} color="#FFC131" number={"Pokemon Arena"}></PlayingCard>
-        <PlayingCard Suit={RustIcon} color="red" number={"Cli Sky"}></PlayingCard>
-        <PlayingCard Suit={DiamondIcon}  color="red" number={"K"}>React frontends and Rust backends are my specialty<br></br>Click on a project card to learn more</PlayingCard>
-      </FoldedHand>
+      <div className="card-stack-row">
+        <FoldedHand>
+          <PlayingCard Suit={RustIcon} color="red" number={"Pomme-Doro"}></PlayingCard>
+          <PlayingCard Suit={ReactIcon} color="#00a5c3ff" number={"MACRO blog"}></PlayingCard>
+          <PlayingCard Suit={TauriIcon} color="#FFC131" number={"Pokemon Arena"}></PlayingCard>
+          <PlayingCard Suit={RustIcon} color="red" number={"Cli Sky"}></PlayingCard>
+          <PlayingCard Suit={DiamondIcon}  color="black" number={"What I do:"}>React frontends and Rust backends are my specialty<br></br>Click on a project card to learn more</PlayingCard>
+        </FoldedHand>                
+      </div>
       
     </div>
   );
