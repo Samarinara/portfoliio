@@ -25,6 +25,7 @@ function App() {
           <PlayingCard Suit={ReactIcon} color="#00a5c3ff" number={"MACRO blog"}></PlayingCard>
           <PlayingCard Suit={TauriIcon} color="#FFC131" number={"Pokemon Arena"}></PlayingCard>
           <PlayingCard Suit={RustIcon} color="red" number={"Cli Sky"}></PlayingCard>
+          <PlayingCard Suit={ReactIcon} color="#00a5c3ff" number={"Yams"}></PlayingCard>
           <PlayingCard Suit={DiamondIcon}  color="black" number={"What I do:"}>React frontends and Rust backends are my specialty<br></br>Click on a project card to learn more</PlayingCard>
         </FoldedHand>                
       </div>
