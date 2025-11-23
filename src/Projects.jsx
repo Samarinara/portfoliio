@@ -44,7 +44,7 @@ function App() {
     <PlayingCard key="p1" Suit={ReactIcon} color="#00a5c3ff" number={"MACRO blog"} infoBody={
       <>
         <p>A pre-alpha decentralized blogging platform based on Bluesky and the AT Protocol.</p>
-        {projectLinks([{ href: 'https://github.com/Samarinara/macroblog', text: 'View on GitHub' }, { href: 'https://macroblog.vercel.app/home', text: 'Use the platform!'}])}
+        {projectLinks([{ href: 'https://github.com/Samarinara/macroblog', text: 'View on GitHub' }, { href: 'https://macroblog.usernametaken.net', text: 'Use the platform!' }])}
       </>
     } />,
     <PlayingCard key="p2" Suit={TauriIcon} color="#FFC131" number={"Pokemon Arena"} infoBody={
@@ -65,7 +65,7 @@ function App() {
     <PlayingCard key="p4" Suit={ReactIcon} color="#00a5c3ff" number={"Yams"} infoBody={
       <>
         <p>Yams (Yet Another Matrix Simulator) is a gamified version of my linear methods homework that helped me ace the course.</p>
-        {projectLinks([{ href: 'https://github.com/Samarinara/YAMS', text: 'View on GitHub' }, { href: 'https://yams-nu.vercel.app/', text: 'Play the game!'}])}
+        {projectLinks([{ href: 'https://github.com/Samarinara/YAMS', text: 'View on GitHub' }, { href: 'https://yams-nu.vercel.app/', text: 'Play the game!' }])}
       </>
     } />,
     <PlayingCard key="p5" Suit={DiamondIcon} color="black" number={"What I do:"} infoBody={
