@@ -1,340 +1,793 @@
-@property --rx { syntax: '<angle>'; initial-value: 0deg; inherits: false; }
-@property --ry { syntax: '<angle>'; initial-value: 0deg; inherits: false; }
-@property --s  { syntax: '<number>'; initial-value: 1;    inherits: false; }
-@property --float { syntax: '<length>'; initial-value: 0px; inherits: false; }
-
-
+@property --rx {
+    syntax: "<angle>";
+    initial-value: 0deg;
+    inherits: false;
+}
+@property --ry {
+    syntax: "<angle>";
+    initial-value: 0deg;
+    inherits: false;
+}
+@property --s {
+    syntax: "<number>";
+    initial-value: 1;
+    inherits: false;
+}
+@property --float {
+    syntax: "<length>";
+    initial-value: 0px;
+    inherits: false;
+}
 
 .center-components {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 #root {
-  text-align: center;
-  overflow: hidden;
+    text-align: center;
+    overflow: hidden;
 }
 
 .card-table {
-  position: absolute;
-  background: #004C33;
-  width: 100vw;
-  height: 90vh;
-  justify-content: center;
-  display: flex;
-  align-items: center; 
-  gap: 2vh;
-  overflow: hidden;
+    position: absolute;
+    background: #004c33;
+    width: 100vw;
+    height: 100dvh;
+    min-height: -webkit-fill-available;
+    justify-content: center;
+    display: flex;
+    align-items: center;
+    gap: clamp(16px, 2vh, 32px);
+    overflow: visible;
 }
 .card-table .allign-top {
-  align-items: top; 
-  padding-top: 2%;
-
+    align-items: top;
+    padding-top: 2%;
 }
 
 .playing-card {
-  width: 24vh;
-  height: 36vh;
-  background-color: beige;
-  border-radius: 12px;
-  box-shadow: 0 6px 15px rgba(0,0,0,0.18);
-  position: relative; /* Needed for corner positioning */
-  font-size: 3vh;
-
-  /* state */
-  --t: 0deg;
-  --rx: 0deg;
-  --ry: 0deg;
-  --s: 1;
-
-  transform-style: preserve-3d;
-  /* Sine-driven vertical float: amplitude = 10px */
-  transform: translateY(calc(sin(var(--t)) * -10px))
-             rotateX(var(--rx)) rotateY(var(--ry)) scale(var(--s));
-  transition:
-    --rx 220ms cubic-bezier(0.2, 0.8, 0.2, 1),
-    --ry 220ms cubic-bezier(0.2, 0.8, 0.2, 1),
-    --s  300ms cubic-bezier(0.34, 1.56, 0.64, 1),
-    box-shadow 220ms ease-out;
-  will-change: transform;  
-  cursor: pointer;
-  padding: 2vh;
-  --suit-size: 4vh;
-  --pad: 8px;
-
-  justify-content: center;
-  display: flex;
-  align-items: center; 
+    transform-style: preserve-3d;
+    /* Sine-driven vertical float: amplitude = 10px */
+    transform: translateY(calc(sin(var(--t)) * -10px)) rotateX(var(--rx))
+        rotateY(var(--ry)) scale(var(--s)) translateZ(0);
+    transition:
+        --rx 220ms cubic-bezier(0.2, 0.8, 0.2, 1),
+        --ry 220ms cubic-bezier(0.2, 0.8, 0.2, 1),
+        --s 300ms cubic-bezier(0.34, 1.56, 0.64, 1),
+        box-shadow 220ms ease-out;
+    will-change: transform;
+    backface-visibility: hidden;
+    perspective: 1000px;
+    cursor: pointer;
+    padding: clamp(12px, 2vh, 20px);
+    --suit-size: clamp(24px, 4vh, 32px);
+    --pad: 8px;
+    background-color: #f5f5dc;
+    border-radius: 12px;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.18);
+    justify-content: center;
+    display: flex;
+    align-items: center;
 }
 
 .playing-card:hover {
-  --rx: 10deg;
-  --ry: 12deg;
-  --s: 1.08;
-  /* The float animation is now part of the .deal .playing-card rule */
-  animation: floatIdle 2.6s linear infinite;
-  box-shadow: 0 14px 28px rgba(0,0,0,0.5);
+    --rx: 10deg;
+    --ry: 12deg;
+    --s: 1.08;
+    /* The float animation is now part of the .deal .playing-card rule */
+    animation: floatIdle 2.6s linear infinite;
+    box-shadow: 0 14px 28px rgba(0, 0, 0, 0.5);
 }
 
 .deal .playing-card {
-  animation: deal 520ms cubic-bezier(.2,.7,.2,1) both, floatIdle 4s linear infinite;
-  animation-delay: calc(var(--i) * 120ms), calc(var(--i) * 120ms + 520ms);
+    animation:
+        deal 420ms cubic-bezier(0.25, 0.1, 0.25, 1) both,
+        floatIdle 4s linear infinite;
+    animation-delay: calc(var(--i) * 55ms), calc(var(--i) * 55ms + 420ms);
 }
 
-
-
 .info-card {
-  width: 24vh;
-  height: 36vh;
-  background-color: beige;
-  border-radius: 12px;
-  box-shadow: 0 6px 15px rgba(0,0,0,0.18);
-  position: relative; /* Needed for corner positioning */
-  font-size: 3vh;
+    width: clamp(200px, 24vh, 280px);
+    height: clamp(300px, 36vh, 420px);
+    background-color: beige;
+    border-radius: 12px;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.18);
+    position: relative;
+    font-size: clamp(16px, 3vh, 24px);
+    transform-style: preserve-3d;
+    /* Sine-driven vertical float: amplitude = 10px */
+    transform: translateY(calc(sin(var(--t)) * -10px)) rotateX(var(--rx))
+        rotateY(var(--ry)) scale(var(--s)) translateZ(0);
+    transition:
+        --rx 220ms cubic-bezier(0.2, 0.8, 0.2, 1),
+        --ry 220ms cubic-bezier(0.2, 0.8, 0.2, 1),
+        --s 300ms cubic-bezier(0.34, 1.56, 0.64, 1),
+        box-shadow 220ms ease-out;
+    will-change: transform;
+    backface-visibility: hidden;
+    perspective: 1000px;
+    cursor: pointer;
+    padding: clamp(12px, 2vh, 20px);
+    --suit-size: clamp(24px, 4vh, 32px);
+    --pad: 8px;
 
-  /* state */
-  --t: 0deg;
-  --rx: 0deg;
-  --ry: 0deg;
-  --s: 1;
-
-  transform-style: preserve-3d;
-  /* Sine-driven vertical float: amplitude = 10px */
-  transform: translateY(calc(sin(var(--t)) * -10px))
-             rotateX(var(--rx)) rotateY(var(--ry)) scale(var(--s));
-  transition:
-    --rx 220ms cubic-bezier(0.2, 0.8, 0.2, 1),
-    --ry 220ms cubic-bezier(0.2, 0.8, 0.2, 1),
-    --s  300ms cubic-bezier(0.34, 1.56, 0.64, 1),
-    box-shadow 220ms ease-out;
-  will-change: transform;  
-  cursor: pointer;
-  padding: 2vh;
-  --suit-size: 4vh;
-  --pad: 8px;
-
-  justify-content: center;
-  display: flex;
-  align-items: center; 
+    justify-content: center;
+    display: flex;
+    align-items: center;
 }
 
 .info-card:hover {
-  --s: 1.08;
-  /* The float animation is now part of the .deal .playing-card rule */
-  animation: floatIdle 2.6s linear infinite;
-  box-shadow: 0 14px 28px rgba(0,0,0,0.5);
+    --s: 1.08;
+    /* The float animation is now part of the .deal .playing-card rule */
+    animation: floatIdle 2.6s linear infinite;
+    box-shadow: 0 14px 28px rgba(0, 0, 0, 0.5);
 }
 
 .deal .info-card {
-  animation: info-deal 700ms cubic-bezier(.2,.7,.2,1) both, floatIdle 4s linear infinite;
-  animation-delay: calc(var(--i) * 120ms), calc(var(--i) * 120ms + 520ms);
+    animation:
+        info-deal 550ms cubic-bezier(0.32, 0.12, 0.28, 1) both,
+        floatIdle 4s linear infinite;
+    animation-delay: calc(var(--i) * 55ms), calc(var(--i) * 55ms + 550ms);
 }
 
 .info-card.dismiss {
-  animation: dismiss-info-card 200ms ease-in forwards;
-  /* Prevent hover effects from re-triggering during dismissal */
-  pointer-events: none;
+    animation: dismiss-info-card 200ms ease-in forwards;
+    /* Prevent hover effects from re-triggering during dismissal */
+    pointer-events: none;
 }
 
 .corner {
-  position: absolute;
-  display: flex;
-  flex-direction: column;
-  align-items: left;
-  --pad: 8px;
-  --suit-size: 2.5vh;
-  font-size: 3.5vh;
-  font-weight: bold;
-  line-height: 1;
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    align-items: left;
+    --pad: 8px;
+    --suit-size: clamp(20px, 2.5vh, 28px);
+    font-size: clamp(18px, 3.5vh, 28px);
+    font-weight: bold;
+    line-height: 1;
 }
 
 .corner .suit {
-  width: var(--suit-size);
-  height: var(--suit-size);
+    width: var(--suit-size);
+    height: var(--suit-size);
 }
 
 .corner.top-left {
-  top: var(--pad);
-  left: var(--pad);
-  display: flex;
-  flex-direction: column;
-  align-items: left;
-
+    top: var(--pad);
+    left: var(--pad);
+    display: flex;
+    flex-direction: column;
+    align-items: left;
 }
 
 .corner.bottom-right {
-  bottom: var(--pad);
-  right: var(--pad);
-  transform: rotate(180deg);
+    bottom: var(--pad);
+    right: var(--pad);
+    transform: rotate(180deg);
 }
 
 .card-text {
-  text-justify: newspaper;
+    text-justify: newspaper;
 }
 
-.card-stack-row{
-  display: flex;
-  flex-direction: row;
-  align-items: left;  
-  gap: 2vh;
+.card-stack-row {
+    display: flex;
+    flex-direction: row;
+    align-items: left;
+    gap: clamp(16px, 2vh, 32px);
 }
 
 @keyframes deal {
-  0%   { transform: translate(-50vw, 50vh) rotate(-45deg) rotateY(180deg); opacity: 0; }
-  10% {
-    transform: translate(var(--tx), var(--ty)) rotate(var(--r))
-               rotateX(var(--rx)) rotateY(180deg) scale(var(--s));
-    opacity: 1;
-  }
-  100% {
-    transform: translate(var(--tx), var(--ty)) rotate(var(--r))
-               /* We need to re-add the other transforms so hover works */
-               rotateX(var(--rx)) rotateY(var(--ry)) scale(var(--s));
-    opacity: 1; }
+    0% {
+        transform: translate(-8vw, 110vh) rotate(-42deg) rotateY(180deg) scale(1);
+        opacity: 0;
+    }
+    12% {
+        transform: translate(-4vw, 55vh) rotate(-28deg) rotateY(110deg) scale(1);
+        opacity: 0.6;
+    }
+    24% {
+        transform: translate(var(--tx), 25vh) rotate(-14deg) rotateY(65deg) scale(1);
+        opacity: 0.85;
+    }
+    38% {
+        transform: translate(var(--tx), var(--ty)) rotate(var(--r))
+            rotateX(var(--rx)) rotateY(35deg) scale(1);
+        opacity: 1;
+    }
+    52% {
+        transform: translate(var(--tx), var(--ty)) rotate(var(--r))
+            rotateX(var(--rx)) rotateY(18deg) scale(1);
+        opacity: 1;
+    }
+    68% {
+        transform: translate(var(--tx), var(--ty)) rotate(var(--r))
+            rotateX(var(--rx)) rotateY(8deg) scale(1);
+        opacity: 1;
+    }
+    82% {
+        transform: translate(var(--tx), var(--ty)) rotate(var(--r))
+            rotateX(var(--rx)) rotateY(2deg) scale(1);
+        opacity: 1;
+    }
+    92% {
+        transform: translate(var(--tx), var(--ty)) rotate(var(--r))
+            rotateX(var(--rx)) rotateY(-1deg) scale(1);
+        opacity: 1;
+    }
+    100% {
+        transform: translate(var(--tx), var(--ty)) rotate(var(--r))
+            /* We need to re-add the other transforms so hover works */
+            rotateX(var(--rx)) rotateY(var(--ry)) scale(var(--s));
+        opacity: 1;
+    }
 }
 
 @keyframes info-deal {
-  0%   { transform: translate(-50vw, 50vh) rotate(-20deg) rotateY(90deg); opacity: 0; }
-  10% {
-    transform: translate(var(--tx), var(--ty)) rotate(var(--r))
-               rotateX(var(--rx)) rotateY(100deg) scale(var(--s));
-    opacity: 1;
-  }
-  100% {
-    transform: translate(var(--tx), var(--ty)) rotate(var(--r))
-               /* We need to re-add the other transforms so hover works */
-               rotateX(var(--rx)) rotateY(var(--ry)) scale(var(--s));
-    opacity: 1; }
+    0% {
+        transform: translate(-8vw, 110vh) rotate(-40deg) rotateY(180deg) scale(1);
+        opacity: 0;
+    }
+    16% {
+        transform: translate(-4vw, 55vh) rotate(-25deg) rotateY(110deg) scale(1);
+        opacity: 0.65;
+    }
+    32% {
+        transform: translate(var(--tx), 25vh) rotate(-12deg) rotateY(65deg) scale(1);
+        opacity: 0.88;
+    }
+    48% {
+        transform: translate(var(--tx), var(--ty)) rotate(var(--r))
+            rotateX(var(--rx)) rotateY(32deg) scale(1);
+        opacity: 1;
+    }
+    64% {
+        transform: translate(var(--tx), var(--ty)) rotate(var(--r))
+            rotateX(var(--rx)) rotateY(16deg) scale(1);
+        opacity: 1;
+    }
+    78% {
+        transform: translate(var(--tx), var(--ty)) rotate(var(--r))
+            rotateX(var(--rx)) rotateY(7deg) scale(1);
+        opacity: 1;
+    }
+    88% {
+        transform: translate(var(--tx), var(--ty)) rotate(var(--r))
+            rotateX(var(--rx)) rotateY(2deg) scale(1);
+        opacity: 1;
+    }
+    96% {
+        transform: translate(var(--tx), var(--ty)) rotate(var(--r))
+            rotateX(var(--rx)) rotateY(-1deg) scale(1);
+        opacity: 1;
+    }
+    100% {
+        transform: translate(var(--tx), var(--ty)) rotate(var(--r))
+            /* We need to re-add the other transforms so hover works */
+            rotateX(var(--rx)) rotateY(var(--ry)) scale(var(--s));
+        opacity: 1;
+    }
 }
 
 @keyframes floatIdle {
-  from { --t: 0deg; }
-  to   { --t: 360deg; }
+    from {
+        --t: 0deg;
+    }
+    to {
+        --t: 360deg;
+    }
 }
 
 @keyframes dismiss-info-card {
-  from {
-    opacity: 1;
-    transform: var(--current-transform, scale(1));
-  }
-  to {
-    opacity: 0;
-    transform: var(--current-transform, scale(1)) scale(0.8);
-  }
+    from {
+        opacity: 1;
+        transform: var(--current-transform, scale(1));
+    }
+    to {
+        opacity: 0;
+        transform: var(--current-transform, scale(1)) scale(0.8);
+    }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .deal .card { animation: none; opacity: 1; transform: translate(var(--tx), var(--ty)) rotate(var(--r)); }
+    .deal .card {
+        animation: none;
+        opacity: 1;
+        transform: translate(var(--tx), var(--ty)) rotate(var(--r));
+    }
 }
 
-    @keyframes bounceFadeIn {
-      0%   { opacity: 0; transform: translateY(16px) scale(0.98); }
-      60%  { opacity: 1; transform: translateY(-8px) scale(1.02); }
-      80%  {           transform: translateY(4px)  scale(0.995); }
-      100% { opacity: 1; transform: translateY(0)  scale(1); }
+/* Mobile-first responsive adjustments */
+.card-table {
+    /* Mobile styles as default */
+    overflow: visible;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    padding-top: 3vw;
+    gap: 8vw;
+}
+
+/* Desktop enhancements */
+@media (min-width: 769px) {
+    .card-table:not(.mobile-layout) {
+        overflow: visible;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        padding-top: clamp(60px, 10vh, 80px);
+        gap: clamp(8px, min(1.5vw, 2vh), 24px);
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        box-sizing: border-box;
+        padding: clamp(8px, min(2vw, 2vh), 20px);
+    }
+}
+
+/* Mobile-first card styling */
+.playing-card {
+    width: 80vw;
+    max-width: 280px;
+    aspect-ratio: 2/3;
+    font-size: clamp(16px, 4vw, 20px);
+    --suit-size: clamp(24px, 6vw, 32px);
+    padding: clamp(12px, 3vw, 20px);
+}
+
+/* Desktop enhancements */
+@media (min-width: 769px) {
+    .playing-card:not(.mobile-layout .playing-card) {
+        /* More adaptive scaling based on viewport dimensions */
+        width: clamp(160px, min(20vw, 22vh), 320px);
+        height: clamp(240px, min(30vw, 33vh), 480px);
+        aspect-ratio: 2/3;
+        font-size: clamp(14px, min(2.5vw, 2.8vh), 22px);
+        --suit-size: clamp(20px, min(3vw, 3.5vh), 28px);
+        padding: clamp(8px, min(1.5vw, 2vh), 16px);
+        max-width: 28vw;
+        max-height: 42vh;
+    }
+}
+
+/* Mobile-first info card styling */
+.info-card {
+    width: 80vw;
+    max-width: 280px;
+    height: auto;
+    min-height: 120px;
+    background-color: beige;
+    border-radius: 12px;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.18);
+    position: relative;
+    font-size: clamp(16px, 4vw, 20px);
+    --suit-size: clamp(24px, 6vw, 32px);
+    padding: clamp(12px, 3vw, 20px);
+}
+
+/* Desktop enhancements */
+@media (min-width: 769px) {
+    .info-card:not(.mobile-layout .info-card) {
+        width: clamp(160px, min(20vw, 22vh), 320px);
+        height: clamp(240px, min(30vw, 33vh), 480px);
+        aspect-ratio: 2/3;
+        font-size: clamp(14px, min(2.5vw, 2.8vh), 22px);
+        --suit-size: clamp(20px, min(3vw, 3.5vh), 28px);
+        padding: clamp(8px, min(1.5vw, 2vh), 16px);
+        max-width: 28vw;
+        max-height: 42vh;
+    }
+}
+
+/* Mobile-first corner styling */
+.corner {
+    --suit-size: clamp(20px, 5vw, 24px);
+    font-size: clamp(18px, 4.5vw, 22px);
+    --pad: clamp(8px, 2vw, 12px);
+}
+
+/* Desktop enhancements */
+@media (min-width: 769px) {
+    .corner:not(.mobile-layout .corner) {
+        --suit-size: clamp(20px, 2.5vh, 28px);
+        font-size: clamp(18px, 3.5vh, 28px);
+        --pad: 8px;
+    }
+}
+
+/* Mobile-first card text styling */
+.card-text {
+    font-size: clamp(14px, 2.5vw, 18px);
+}
+
+/* Desktop enhancements */
+@media (min-width: 769px) {
+    .card-text:not(.mobile-layout .card-text) {
+        font-size: clamp(14px, 1.5vh, 18px);
+    }
+}
+
+/* Touch-friendly interactions - disable hover effects on touch devices */
+@media (hover: none) and (pointer: coarse) {
+    .playing-card:hover {
+        --rx: 0deg !important;
+        --ry: 0deg !important;
+        --s: 1 !important;
+        transform: none !important;
+        animation: none !important;
+        box-shadow: 0 6px 15px rgba(0, 0, 0, 0.18) !important;
     }
 
+    .info-card:hover {
+        --s: 1 !important;
+        transform: none !important;
+        animation: none !important;
+        box-shadow: 0 6px 15px rgba(0, 0, 0, 0.18) !important;
+    }
+
+    /* Enhanced touch feedback */
+    .playing-card:active {
+        --s: 1.02;
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.25);
+        transform: scale(1.02) !important;
+    }
+
+    .info-card:active {
+        --s: 1.02;
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.25);
+        transform: scale(1.02) !important;
+    }
+
+    /* Enhanced place animations on mobile */
+    .deal .playing-card {
+        animation: deal-mobile-place 380ms cubic-bezier(0.25, 0.08, 0.25, 1) both;
+        animation-delay: calc(var(--i) * 35ms);
+    }
+
+    .deal .info-card {
+        animation: deal-mobile-place 420ms cubic-bezier(0.32, 0.1, 0.28, 1) both;
+        animation-delay: calc(var(--i) * 35ms);
+    }
+}
+
+/* Enhanced mobile place animation with GPU acceleration */
+@keyframes deal-mobile-place {
+    0% {
+        transform: translateY(100px) translateX(-25px) scale(1) rotate(-38deg) translateZ(0);
+        opacity: 0;
+    }
+    20% {
+        transform: translateY(50px) translateX(-12px) scale(1) rotate(-22deg) translateZ(0);
+        opacity: 0.55;
+    }
+    40% {
+        transform: translateY(25px) translateX(-6px) scale(1) rotate(-11deg) translateZ(0);
+        opacity: 0.85;
+    }
+    60% {
+        transform: translateY(8px) translateX(-2px) scale(1) rotate(-4deg) translateZ(0);
+        opacity: 0.95;
+    }
+    80% {
+        transform: translateY(-1px) translateX(1px) scale(1) rotate(1deg) translateZ(0);
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(0) translateX(0) scale(1) rotate(0deg) translateZ(0);
+        opacity: 1;
+    }
+}
+
+/* Fallback simple mobile animation */
+@keyframes deal-mobile {
+    0% {
+        transform: translateY(80px) translateX(-20px) scale(1) translateZ(0);
+        opacity: 0;
+    }
+    100% {
+        transform: translateY(0) translateX(0) scale(1) translateZ(0);
+        opacity: 1;
+    }
+}
+
+/* Mobile performance optimizations */
+@media (hover: none) and (pointer: coarse) and (max-width: 768px) {
+    .playing-card,
+    .info-card {
+        transform: translateZ(0); /* GPU acceleration */
+        backface-visibility: hidden; /* Prevent flickering */
+        perspective: 1000px; /* Smooth 3D transforms */
+    }
+
+    /* Reduce animation complexity on low-end devices */
+    @media (max-height: 600px) {
+        .deal .playing-card,
+        .deal .info-card {
+            animation: deal-mobile-simple 300ms ease-out both;
+            animation-delay: calc(var(--i) * 40ms);
+        }
+    }
+
+    @keyframes deal-mobile-simple {
+        0% {
+            opacity: 0;
+        }
+        100% {
+            opacity: 1;
+        }
+    }
+
+    /* Enable container queries on card containers */
+    .card-table {
+        container-type: inline-size;
+    }
+
+    /* Container queries for component-level responsiveness */
+    @container (max-width: 400px) {
+        .playing-card {
+            width: 90%;
+            font-size: var(--font-size-sm);
+            --suit-size: var(--font-size-lg);
+        }
+
+        .info-card {
+            width: 90%;
+            font-size: var(--font-size-sm);
+            --suit-size: var(--font-size-lg);
+        }
+    }
+
+    @container (max-width: 300px) {
+        .playing-card,
+        .info-card {
+            width: 95%;
+            font-size: var(--font-size-xs);
+            padding: var(--space-sm);
+        }
+
+        .corner {
+            --suit-size: var(--font-size-base);
+            font-size: var(--font-size-sm);
+            --pad: var(--space-xs);
+        }
+    }
+}
+
+/* Mobile-specific modal adjustments */
+@media (max-width: 768px) {
+    .modal-content {
+        width: min(90vw, 100%);
+        max-height: 80vh;
+        padding: 12px 16px;
+    }
+
+    .modal-header h2 {
+        font-size: 8vmin;
+    }
+
+    .modal-body {
+        font-size: 4vmin;
+    }
+
+    .project-links {
+        font-size: 3vmin;
+    }
+}
+
+@keyframes bounceFadeIn {
+    0% {
+        opacity: 0;
+        transform: translateY(16px) scale(0.98);
+    }
+    60% {
+        opacity: 1;
+        transform: translateY(-8px) scale(1.02);
+    }
+    80% {
+        transform: translateY(4px) scale(0.995);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+.bounce-fade {
+    display: inline-block;
+    animation-name: bounceFadeIn;
+    animation-duration: var(--duration, 700ms);
+    animation-delay: var(--delay, 0ms);
+    animation-timing-function: ease-out;
+    animation-fill-mode: both;
+    will-change: opacity, transform;
+}
+
+@media (prefers-reduced-motion: reduce) {
     .bounce-fade {
-      display: inline-block;
-      animation-name: bounceFadeIn;
-      animation-duration: var(--duration, 700ms);
-      animation-delay: var(--delay, 0ms);
-      animation-timing-function: ease-out;
-      animation-fill-mode: both;
-      will-change: opacity, transform;
-    }
-
-    @media (prefers-reduced-motion: reduce) {
-      .bounce-fade {
         animation: none !important;
         opacity: 1 !important;
         transform: none !important;
-      }
     }
+}
 
 /* in App.css */
 .modal {
-  position: fixed;
-  inset: 0;
-  background: rgba(0,0,0,0.5);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  animation: fade-in-background 200ms ease-out forwards;
-  z-index: 1000;
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    animation: fade-in-background 200ms ease-out forwards;
+    z-index: 1000;
 }
 
 .modal.dismiss {
-  /* Animate the background fade-out */
-  animation: fade-out-background 200ms ease-in forwards;
+    /* Animate the background fade-out */
+    animation: fade-out-background 200ms ease-in forwards;
 }
 
 .modal-content {
-  color: #242424;
-  border-radius: 12px;
-  padding: 16px 20px;
-  width: min(640px, 90vw);
-  max-height: 85vh;
-  overflow: auto;
-  position: relative;
+    color: #242424;
+    border-radius: 12px;
+    padding: 16px 20px;
+    width: min(640px, 90vw);
+    max-height: 85vh;
+    overflow: auto;
+    position: relative;
 }
 
 .modal-close {
-  position: absolute;
-  top: 8px;
-  right: 10px;
-  background: transparent;
-  border: none;
-  color: inherit;
-  font-size: 24px;
-  cursor: pointer;
+    position: absolute;
+    top: 8px;
+    right: 10px;
+    background: transparent;
+    border: none;
+    color: inherit;
+    font-size: 24px;
+    cursor: pointer;
 }
 
 .modal-header {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 8px;
 }
 
 .modal-header h2 {
-  font-size: 6vmin;
-  margin-bottom: 0.5rem;
+    font-size: 6vmin;
+    margin-bottom: 0.5rem;
 }
 
 .modal-body {
-  font-size: 3vmin;
-  line-height: 1.6;
+    font-size: 3vmin;
+    line-height: 1.6;
 }
 
 .modal-body p {
-  margin-bottom: 1rem;
+    margin-bottom: 1rem;
 }
 
 .project-links {
-  margin-top: 1.5rem;
-  font-size: 2.2vmin;
-  text-align: center;
+    margin-top: 1.5rem;
+    font-size: 2.2vmin;
+    text-align: center;
 }
 
 .project-links a {
-  color: #0056b3;
-  text-decoration: none;
-  font-weight: 600;
-  margin: 0 0.5rem;
+    color: #0056b3;
+    text-decoration: none;
+    font-weight: 600;
+    margin: 0 0.5rem;
 }
 
 .project-links a:hover {
-  text-decoration: underline;
+    text-decoration: underline;
 }
 
 @keyframes fade-in-background {
-  from { background: rgba(0,0,0,0); }
-  to   { background: rgba(0,0,0,0.5); }
+    from {
+        background: rgba(0, 0, 0, 0);
+    }
+    to {
+        background: rgba(0, 0, 0, 0.5);
+    }
 }
 
 @keyframes fade-out-background {
-  from { background: rgba(0,0,0,0.5); }
-  to   { background: rgba(0,0,0,0); }
+    from {
+        background: rgba(0, 0, 0, 0.5);
+    }
+    to {
+        background: rgba(0, 0, 0, 0);
+    }
+}
+
+/* Card Tooltip Styles */
+.card-tooltip {
+    background-color: #f5f5dc;
+    border-radius: 12px;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.18);
+    padding: 12px 16px;
+    font-size: clamp(14px, 2vh, 18px);
+    color: #242424;
+    max-width: 280px;
+    word-wrap: break-word;
+    animation: tooltip-fade-in 200ms ease-out forwards;
+    will-change: opacity, transform;
+    transform: translateZ(0);
+    backface- visibility: hidden;
+    position: relative;
+}
+
+.card-tooltip-arrow {
+    position: absolute;
+    width: 0;
+    height: 0;
+    border: 8px solid transparent;
+}
+
+.card-tooltip-arrow-top {
+    bottom: -16px;
+    left: 50%;
+    transform: translateX(-50%);
+    border-top-color: #f5f5dc;
+}
+
+.card-tooltip-arrow-bottom {
+    top: -16px;
+    left: 50%;
+    transform: translateX(-50%);
+    border-bottom-color: #f5f5dc;
+}
+
+.card-tooltip-arrow-left {
+    right: -16px;
+    top: 50%;
+    transform: translateY(-50%);
+    border-left-color: #f5f5dc;
+}
+
+.card-tooltip-arrow-right {
+    left: -16px;
+    top: 50%;
+    transform: translateY(-50%);
+    border-right-color: #f5f5dc;
+}
+
+@keyframes tooltip-fade-in {
+    0% {
+        opacity: 0;
+        transform: scale(0.95) translateZ(0);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1) translateZ(0);
+    }
+}
+
+/* Mobile tooltip adjustments */
+@media (max-width: 768px) {
+    .card-tooltip {
+        font-size: clamp(12px, 3vw, 16px);
+        padding: 10px 14px;
+        max-width: 240px;
+    }
+}
+
+/* Respect reduced motion preferences */
+@media (prefers-reduced-motion: reduce) {
+    .card-tooltip {
+        animation: none !important;
+        opacity: 1 !important;
+        transform: none !important;
+    }
 }

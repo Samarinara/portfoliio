@@ -1,4 +1,5 @@
 import React from "react";
+import CardTooltip from "./CardTooltip.jsx";
 
 export function PlayingCard({
   color = "black",
@@ -6,9 +7,12 @@ export function PlayingCard({
   Suit,
   children,
   className,
+  infoBody,
+  tooltip,
+  tooltipPosition = "top",
   ...rest
 }) {
-  return (
+  const cardContent = (
     <div className={`playing-card ${className || ''}`.trim()} {...rest} style={{ ...rest.style, color }}>
       <div className="corner top-left">
         <div className="number">{number}</div>
@@ -20,6 +24,16 @@ export function PlayingCard({
         {Suit && <Suit className="suit" aria-hidden="true" />}
       </div>    </div>
   );
+
+  if (tooltip) {
+    return (
+      <CardTooltip text={tooltip} position={tooltipPosition}>
+        {cardContent}
+      </CardTooltip>
+    );
+  }
+
+  return cardContent;
 }
 
 

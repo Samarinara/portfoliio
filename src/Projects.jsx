@@ -1,14 +1,14 @@
-import React, { Children, cloneElement, useEffect, useState } from 'react';
+import React, { Children, cloneElement, useState } from 'react';
 import './App.css'
 import { PlayingCard } from './PlayingCard.jsx';
-import { href, useNavigate } from 'react-router-dom';
+
 import { DiamondIcon, RustIcon, ReactIcon, TauriIcon } from './assets/icons.jsx'
 import FoldedHand from './Folded-Hand.jsx';
 import { InfoCard } from './InfoCard.jsx';
-import { text } from 'motion/react-client';
+
 
 function App() {
-  const navigate = useNavigate();
+
 
   const [info, setInfo] = useState(null);
 
@@ -82,7 +82,7 @@ function App() {
   return (
     <div className='App'>
       <div className="card-stack-row">
-        <FoldedHand>
+        <FoldedHand mobileBreakpoint={768} mobileOrder={['p5', 'p0', 'p2', 'p4', 'p1', 'p3']}>
           {cards.map((c, idx) =>
             cloneElement(c, {
               key: idx,

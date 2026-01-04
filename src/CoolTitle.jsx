@@ -4,24 +4,17 @@ export function CoolTitle({
   text,
   duration = 700, // ms
   delay = 0,       // ms
-  as: Tag = "span"
+  as: As = "span"
 }) {
-  const styleTag = `
-
-  `;
-
-  return (
-    <>
-      <style>{styleTag}</style>
-      <Tag
-        className="bounce-fade"
-        style={{
-          "--duration": `${duration}ms`,
-          "--delay": `${delay}ms`,
-        }}
-      >
-        {text}
-      </Tag>
-    </>
+  return React.createElement(
+    As,
+    {
+      className: "bounce-fade",
+      style: {
+        "--duration": `${duration}ms`,
+        "--delay": `${delay}ms`,
+      }
+    },
+    text
   );
 }
