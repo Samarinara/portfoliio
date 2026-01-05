@@ -20,7 +20,7 @@ function getOrderedCards(originalCards, orderConfig) {
     // Sort cards based on order config
     Object.entries(orderConfig)
       .sort(([, a], [, b]) => a - b) // Sort by order value
-      .forEach(([cardId, order]) => {
+      .forEach(([cardId]) => {
         // Find card by key prop
         const cardIndex = cards.findIndex(
           (card) =>
@@ -151,7 +151,7 @@ function getOriginalIndices(originalCards, orderConfig) {
 
     Object.entries(orderConfig)
       .sort(([, a], [, b]) => a - b)
-      .forEach(([cardId, order]) => {
+      .forEach(([cardId]) => {
         const cardIndex = originalCards.findIndex(
           (card) =>
             card.key === cardId ||

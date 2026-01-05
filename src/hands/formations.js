@@ -32,7 +32,24 @@ export const formations = {
     };
   },
 
-  folded: (cardIndex, totalCards, { windowSize = { width: 1920 } }) => {
+  folded: (cardIndex, totalCards, { isMobile = false, windowSize = { width: 1920 } }) => {
+    if (isMobile) {
+      // Simple vertical stack for mobile using CSS gap
+      return {
+        "--tx": "0px",
+        "--ty": "0px",
+        "--r": "0deg",
+        "--rx": "0deg",
+        "--ry": "0deg", 
+        "--s": "1",
+        "--t": "0deg",
+        position: "relative",
+        transform: "translateY(0) rotateX(0) rotateY(0) scale(1) translateZ(0)",
+        zIndex: "auto",
+      };
+    }
+    
+    // Original desktop logic
     const spacing = Math.max(35, Math.min(30, windowSize.width * 0.015));
     const middleIndex = (totalCards - 1) / 2;
     const offsetX = (cardIndex - middleIndex) * spacing;
@@ -77,21 +94,21 @@ export const formations = {
 
   column: (cardIndex, totalCards, { isMobile = false, orderedIndices = null } = {}) => {
     if (isMobile) {
-      // Use responsive units for mobile that work across all devices
-      const cardHeight = 120; // 80vw card height + gap
+      // For mobile, use simple relative positioning without transforms
       let effectiveIndex = cardIndex;
       
       // If ordering is applied, use the visual position for vertical spacing
       if (orderedIndices && Array.isArray(orderedIndices)) {
         effectiveIndex = orderedIndices.indexOf(cardIndex);
       }
-      
-      const offsetY = effectiveIndex * cardHeight;
 
       return {
         "--tx": "0px",
-        "--ty": `${offsetY}px`,
+        "--ty": "0px",
         "--r": "0deg",
+        position: "relative",
+        marginTop: effectiveIndex > 0 ? "6vw" : "0",
+        transform: "none",
       };
     } else {
       // Use clamp for desktop to ensure consistent sizing

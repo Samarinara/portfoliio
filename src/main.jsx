@@ -4,10 +4,10 @@ import { Route, BrowserRouter, Routes, Navigate } from "react-router-dom";
 import "./index.css";
 import App from "./App.jsx";
 import TopBar from "./TopBar.jsx";
-import BottomBar from "./bottom-bar.jsx";
 import UnderConstruction from "./UnderConstruction.jsx";
 import Projects from "./Projects.jsx";
 import ProfilePage from "./ProfilePage.jsx";
+import BackendDev from "./BackendDev.jsx";
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
@@ -18,6 +18,7 @@ createRoot(document.getElementById("root")).render(
         <Route path="/under-construction" element={<UnderConstruction />} />
         <Route path="/projects" element={<Projects />} />
         <Route path="/profile" element={<ProfilePage />} />
+        <Route path="/backend-dev" element={<BackendDev />} />
         <Route path="*" element={<Navigate to="/home" />} />
       </Routes>
     </BrowserRouter>

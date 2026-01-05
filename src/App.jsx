@@ -23,7 +23,7 @@ function App() {
   const navigate = useNavigate();
 
   // Define mobile order - cards will appear vertically in this order on mobile only
-  const mobileOrder = [3, 1, 0, 2]; // 4th card first, then 2nd, then 1st, then 3rd
+  const mobileOrder = [2, 3, 1, 0]; // 4th card first, then 2nd, then 1st, then 3rd
 
   return (
     <div>

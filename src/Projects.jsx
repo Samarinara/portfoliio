@@ -83,9 +83,8 @@ function App() {
     <div className='App'>
       <div className="card-stack-row">
         <FoldedHand mobileBreakpoint={768} mobileOrder={['p5', 'p0', 'p2', 'p4', 'p1', 'p3']}>
-          {cards.map((c, idx) =>
+          {cards.map((c) =>
             cloneElement(c, {
-              key: idx,
               onClick: () => openCard(c.props),
             })
           )}

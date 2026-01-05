@@ -7,13 +7,18 @@ export function PlayingCard({
   Suit,
   children,
   className,
-  infoBody,
   tooltip,
   tooltipPosition = "top",
-  ...rest
+  ...domProps
 }) {
+  // Filter out non-DOM props
+  const { style, ...otherDomProps } = domProps;
   const cardContent = (
-    <div className={`playing-card ${className || ''}`.trim()} {...rest} style={{ ...rest.style, color }}>
+    <div 
+      className={`playing-card ${className || ''}`.trim()} 
+      {...otherDomProps} 
+      style={{ ...style, color }}
+    >
       <div className="corner top-left">
         <div className="number">{number}</div>
         {Suit && <Suit className="suit" aria-hidden="true" />}
