@@ -89,9 +89,11 @@ const ProfilePage = () => {
                     My primary language is <b>Rust</b> but I also have
                     experience with <b>JavaScript</b> and <b>Python</b> writing
                     robust REST APIs and web applications.<br></br>
+                    <br></br>
                     I’m also skilled in <b>SQL</b>, optimising both new and
                     legacy databases on local, serverless, or on cloud platforms
                     like AWS or GCP.
+                    <br></br>
                     <br></br>
                     <b>Custom AI models</b> enable me to build tools and
                     services that adapt to changing environments. Not only can I
